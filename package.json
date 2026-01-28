@@ -1,8 +1,8 @@
 {
-  "name": "handbooks-slides",
+  "name": "Handbooks-slides",
   "version": "1.0.0",
   "description": "A workspace for Slidev presentations",
-  "scripts": {
+  "scripts": {пш
     "export-og": "slidev-workspace export-og",
     "preview": "slidev-workspace preview",
     "build": "slidev-workspace build"
