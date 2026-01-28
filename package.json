@@ -1,5 +1,5 @@
 {
-  "name": "Handbooks-slides",
+  "name": "Handbooks-presentations",
   "version": "1.0.0",
   "description": "A workspace for Slidev presentations",
   "scripts": {
@@ -17,7 +17,7 @@
     "slides",
     "slidev-workspace"
   ],
-  "author": "Leo Chiu",
+  "author": "Adamanr",
   "license": "MIT",
   "devDependencies": {
     "playwright-chromium": "^1.56.1"
