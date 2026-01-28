@@ -1,6 +1,5 @@
-baseUrl: /slidev-workspace-starter
+baseUrl: /handbooks-slides
 
 hero:
-  title: Slidev Workspace Starter
-  description: A starter for Slidev Workspace
-
+  title: Презентации по курсу
+  description: Здесь вы найдете можете найти различные актуальные презентации по курсу Handbooks

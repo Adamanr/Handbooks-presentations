@@ -1,17 +1,9 @@
 ---
-# You can also start simply with 'default'
 theme: seriph
-# random image from a curated Unsplash collection by Anthony
-# like them? see https://unsplash.com/collections/94734566/slidev
-background: /background.webp
-# some information about your slides (markdown enabled)
-title: Slidev Start 1
+background: https://i.pinimg.com/736x/ec/1c/e0/ec1ce032f585bbd6ce5a06f210c585f7.jpg
+title: Введение в Go
 info: |
-  ## Slidev Starter Template
-  Presentation slides for developers.
-
-  Learn more at [Sli.dev](https://sli.dev)
-# apply unocss classes to the current slide
+  Go (или Golang) — это современный язык программирования
 class: text-center
 # https://sli.dev/features/drawing
 drawings:
@@ -20,613 +12,1402 @@ drawings:
 transition: slide-left
 # enable MDC Syntax: https://sli.dev/features/mdc
 mdc: true
-author: Leo Chiu
+author: Go
 # open graph
-seoMeta:
-  ogTitle: Slidev Starter 1
-  ogDescription: Presentation slides for developers - Slidev Starter 1
+# seoMeta:
+#  ogImage: https://cover.sli.dev
 routerMode: hash
 ---
 
-# Slidev Starter 1
+# **Введение в Go**
 
-Presentation slides for developers
+Переменные, типы данных, операторы и указатели
 
-<div @click="$slidev.nav.next" class="mt-12 py-1" hover:bg="white op-10">
-  Press Space for next page <carbon:arrow-right />
+<div class="pt-12">
+  <span @click="$slidev.nav.next" class="px-2 py-1 rounded cursor-pointer" hover="bg-white bg-opacity-10">
+    Начать обучение <carbon:arrow-right class="inline"/>
+  </span>
 </div>
 
-<div class="abs-br m-6 text-xl">
-  <button @click="$slidev.nav.openInEditor()" title="Open in Editor" class="slidev-icon-btn">
-    <carbon:edit />
-  </button>
-  <a href="https://github.com/slidevjs/slidev" target="_blank" class="slidev-icon-btn">
-    <carbon:logo-github />
-  </a>
-</div>
-
-<!--
-The last comment block of each slide will be treated as slide notes. It will be visible and editable in Presenter Mode along with the slide. [Read more in the docs](https://sli.dev/guide/syntax.html#notes)
--->
-
----
-transition: fade-out
 ---
 
-# What is Slidev?
+# Комментарии в Go
 
-Slidev is a slides maker and presenter designed for developers, consist of the following features
+Текст, который не выполняется при запуске программы
 
-- 📝 **Text-based** - focus on the content with Markdown, and then style them later
-- 🎨 **Themable** - themes can be shared and re-used as npm packages
-- 🧑‍💻 **Developer Friendly** - code highlighting, live coding with autocompletion
-- 🤹 **Interactive** - embed Vue components to enhance your expressions
-- 🎥 **Recording** - built-in recording and camera view
-- 📤 **Portable** - export to PDF, PPTX, PNGs, or even a hostable SPA
-- 🛠 **Hackable** - virtually anything that's possible on a webpage is possible in Slidev
-<br>
-<br>
+Комментарии используются для объяснения кода и документирования его функциональности.
 
-Read more about [Why Slidev?](https://sli.dev/guide/why)
+```go {all|1|3-7|9-11}
+// Однострочный комментарий — объясняем одну строку
 
-<!--
-You can have `style` tag in markdown to override the style for the current page.
-Learn more: https://sli.dev/features/slide-scope-style
--->
+/*
+   Многострочный комментарий.
+   Полезен для описания сложной логики
+   или временного отключения кода.
+*/
 
-<style>
-h1 {
-  background-color: #2B90B6;
-  background-image: linear-gradient(45deg, #4EC5D4 10%, #146b8c 20%);
-  background-size: 100%;
-  -webkit-background-clip: text;
-  -moz-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  -moz-text-fill-color: transparent;
-}
-</style>
-
-<!--
-Here is another comment.
--->
-
----
-transition: slide-up
-level: 2
----
-
-# Navigation
-
-Hover on the bottom-left corner to see the navigation's controls panel, [learn more](https://sli.dev/guide/ui#navigation-bar)
-
-## Keyboard Shortcuts
-
-|                                                     |                             |
-| --------------------------------------------------- | --------------------------- |
-| <kbd>right</kbd> / <kbd>space</kbd>                 | next animation or slide     |
-| <kbd>left</kbd>  / <kbd>shift</kbd><kbd>space</kbd> | previous animation or slide |
-| <kbd>up</kbd>                                       | previous slide              |
-| <kbd>down</kbd>                                     | next slide                  |
-
-<!-- https://sli.dev/guide/animations.html#click-animation -->
-<img
-  v-click
-  class="absolute -bottom-9 -left-7 w-80 opacity-50"
-  src="https://sli.dev/assets/arrow-bottom-left.svg"
-  alt=""
-/>
-<p v-after class="absolute bottom-23 left-45 opacity-30 transform -rotate-10">Here!</p>
-
----
-layout: two-cols
-layoutClass: gap-16
----
-
-# Table of contents
-
-You can use the `Toc` component to generate a table of contents for your slides:
-
-```html
-<Toc minDepth="1" maxDepth="1" />
+// TODO: реализовать кэширование результатов
+// FIXME: исправить утечку памяти при большом трафике
+// HACK: временное решение до обновления библиотеки
 ```
-
-The title will be inferred from your slide content, or you can override it with `title` and `level` in your frontmatter.
-
-::right::
-
-<Toc text-sm minDepth="1" maxDepth="2" />
-
----
-layout: image-right
-image: https://cover.sli.dev
----
-
-# Code
-
-Use code snippets and get the highlighting directly, and even types hover!
-
-```ts [filename-example.ts] {all|4|6|6-7|9|all} twoslash
-// TwoSlash enables TypeScript hover information
-// and errors in markdown code blocks
-// More at https://shiki.style/packages/twoslash
-import { computed, ref } from 'vue'
-
-const count = ref(0)
-const doubled = computed(() => count.value * 2)
-
-doubled.value = 2
-```
-
-<arrow v-click="[4, 5]" x1="350" y1="310" x2="195" y2="342" color="#953" width="2" arrowSize="1" />
-
-<!-- This allow you to embed external code blocks -->
-<<< @/snippets/external.ts#snippet
-
-<!-- Footer -->
-
-[Learn more](https://sli.dev/features/line-highlighting)
-
-<!-- Inline style -->
-<style>
-.footnotes-sep {
-  @apply mt-5 opacity-10;
-}
-.footnotes {
-  @apply text-sm opacity-75;
-}
-.footnote-backref {
-  display: none;
-}
-</style>
-
-<!--
-Notes can also sync with clicks
-
-[click] This will be highlighted after the first click
-
-[click] Highlighted with `count = ref(0)`
-
-[click:3] Last click (skip two clicks)
--->
-
----
-level: 2
----
-
-# Shiki Magic Move
-
-Powered by [shiki-magic-move](https://shiki-magic-move.netlify.app/), Slidev supports animations across multiple code snippets.
-
-Add multiple code blocks and wrap them with <code>````md magic-move</code> (four backticks) to enable the magic move. For example:
-
-````md magic-move {lines: true}
-```ts {*|2|*}
-// step 1
-const author = reactive({
-  name: 'John Doe',
-  books: [
-    'Vue 2 - Advanced Guide',
-    'Vue 3 - Basic Guide',
-    'Vue 4 - The Mystery'
-  ]
-})
-```
-
-```ts {*|1-2|3-4|3-4,8}
-// step 2
-export default {
-  data() {
-    return {
-      author: {
-        name: 'John Doe',
-        books: [
-          'Vue 2 - Advanced Guide',
-          'Vue 3 - Basic Guide',
-          'Vue 4 - The Mystery'
-        ]
-      }
-    }
-  }
-}
-```
-
-```ts
-// step 3
-export default {
-  data: () => ({
-    author: {
-      name: 'John Doe',
-      books: [
-        'Vue 2 - Advanced Guide',
-        'Vue 3 - Basic Guide',
-        'Vue 4 - The Mystery'
-      ]
-    }
-  })
-}
-```
-
-Non-code blocks are ignored.
-
-```vue
-<!-- step 4 -->
-<script setup>
-const author = {
-  name: 'John Doe',
-  books: [
-    'Vue 2 - Advanced Guide',
-    'Vue 3 - Basic Guide',
-    'Vue 4 - The Mystery'
-  ]
-}
-</script>
-```
-````
-
----
-
-# Components
-
-<div grid="~ cols-2 gap-4">
-<div>
-
-You can use Vue components directly inside your slides.
-
-We have provided a few built-in components like `<Tweet/>` and `<Youtube/>` that you can use directly. And adding your custom components is also super easy.
-
-```html
-<Counter :count="10" />
-```
-
-<!-- ./components/Counter.vue -->
-<Counter :count="10" m="t-4" />
-
-Check out [the guides](https://sli.dev/builtin/components.html) for more.
-
-</div>
-<div>
-
-```html
-<Tweet id="1390115482657726468" />
-```
-
-<Tweet id="1390115482657726468" scale="0.65" />
-
-</div>
-</div>
-
-<!--
-Presenter note with **bold**, *italic*, and ~~striked~~ text.
-
-Also, HTML elements are valid:
-<div class="flex w-full">
-  <span style="flex-grow: 1;">Left content</span>
-  <span>Right content</span>
-</div>
--->
-
----
-class: px-20
----
-
-# Themes
-
-Slidev comes with powerful theming support. Themes can provide styles, layouts, components, or even configurations for tools. Switching between themes by just **one edit** in your frontmatter:
-
-<div grid="~ cols-2 gap-2" m="t-2">
-
-```yaml
----
-theme: default
----
-```
-
-```yaml
----
-theme: seriph
----
-```
-
-<img border="rounded" src="https://github.com/slidevjs/themes/blob/main/screenshots/theme-default/01.png?raw=true" alt="">
-
-<img border="rounded" src="https://github.com/slidevjs/themes/blob/main/screenshots/theme-seriph/01.png?raw=true" alt="">
-
-</div>
-
-Read more about [How to use a theme](https://sli.dev/guide/theme-addon#use-theme) and
-check out the [Awesome Themes Gallery](https://sli.dev/resources/theme-gallery).
-
----
-
-# Clicks Animations
-
-You can add `v-click` to elements to add a click animation.
-
-<div v-click>
-
-This shows up when you click the slide:
-
-```html
-<div v-click>This shows up when you click the slide.</div>
-```
-
-</div>
-
-<br>
 
 <v-click>
 
-The <span v-mark.red="3"><code>v-mark</code> directive</span>
-also allows you to add
-<span v-mark.circle.orange="4">inline marks</span>
-, powered by [Rough Notation](https://roughnotation.com/):
+💡 **Go имеет инструмент `godoc`** — он генерирует документацию из комментариев перед функциями/типами.
 
-```html
-<span v-mark.underline.orange>inline markers</span>
+</v-click>
+
+---
+
+# Переменные в Go
+
+Именованные ячейки памяти, куда мы кладём данные
+
+Переменные могут быть объявлены несколькими способами:
+
+```go {all|2-3|6-7|10-12}
+// 1. Полное объявление с типом
+var name string = "Алексей"
+var age int = 27
+
+// 2. Без типа — Go сам догадается (type inference)
+var city = "Санкт-Петербург"
+var height = 178.5
+
+// 3. Короткое объявление := (самый популярный способ внутри функций)
+name := "Алексей"     // string
+age := 27             // int
+isDeveloper := true   // bool
+```
+
+---
+
+# Переменные: продолжение
+
+Множественное и групповое объявление
+
+```go {all|2-7|10}
+// 4. Множественное объявление — полезно для нескольких переменных
+var (
+    firstName  string = "Мария"
+    lastName   string = "Иванова"
+    salary     float64 = 150000.0
+    employed   bool    = true
+)
+
+// 5. Групповое короткое объявление — удобно в одной строке
+product, price, inStock := "Ноутбук", 89990.0, true
+```
+
+<v-click>
+
+⚠️ **Важно**: `:=` работает только внутри функций. Снаружи используйте `var`.
+
+</v-click>
+
+---
+
+# Константы
+
+Значения, которые нельзя изменить
+
+Объявляются через `const`. Хорошая практика — использовать определение групповых констант в начале файла для дальнейшего обращения к ним в этом же файле.
+
+```go {all|1-2|5-9}
+const Pi = 3.14159
+const AppName = "Мой калькулятор"
+
+// Пример с HTTP статусами
+const (
+    HTTPStatusOK       = 200
+    HTTPStatusNotFound = 404
+    MaxRetries         = 5
+)
+```
+
+<v-click>
+
+### Преимущества
+
+- ⚡ **Вычисляются на этапе компиляции** — это делает код быстрее и безопаснее!
+- 🔒 Защита от случайного изменения
+- 📖 Улучшают читаемость кода
+
+</v-click>
+
+---
+
+# Строки в Go
+
+Последовательность байтов в кодировке UTF-8
+
+```go {all|1|2-6|9}
+greeting := "Привет, Go! 🚀"
+multiline := `
+Это многострочная строка.
+Очень удобно для SQL-запросов
+или длинных сообщений.
+`
+
+// Длина строки в байтах
+length := len(greeting)  // посчитает байты, не символы!
+```
+
+---
+
+# Unicode и UTF-8
+
+Как Go работает с символами
+
+<div class="grid grid-cols-2 gap-4">
+
+<div>
+
+### Unicode — это стандарт
+
+**Международный стандарт**, который присваивает **уникальный номер** (code point) каждому символу:
+
+- `'A'` → U+0041
+- `'Я'` → U+042F  
+- `'👋'` → U+1F44B
+
+На сегодня: **более 149 000 символов**
+
+Unicode отвечает на вопрос: **какой номер у символа?**
+
+Он **НЕ говорит**, как хранить эти номера в памяти!
+
+</div>
+
+<div>
+
+### UTF-8 — это кодировка
+
+**Способ кодирования** символов Unicode в байты (самый популярный в мире).
+
+Один символ → от 1 до 4 байт:
+
+| Символы | Байт | Пример |
+|---------|------|--------|
+| ASCII | 1 | `'A'` → 1 байт |
+| Русские | 2 | `'Я'` → 2 байта |
+| Эмодзи | 3-4 | `'👋'` → 4 байта |
+
+**Более 98% веб-сайтов** используют UTF-8!
+
+</div>
+
+</div>
+
+---
+
+# Преимущества UTF-8
+
+Почему это важно для Go
+
+<v-click>
+
+### Главные преимущества UTF-8:
+
+1. **Обратная совместимость с ASCII**: первые 128 символов — это обычный ASCII (1 байт)
+2. **Экономия памяти**: английский текст занимает столько же места, сколько в старых кодировках
+3. **Безопасность**: нет проблем с "битыми" символами при обрезке строки
+4. **Универсальность**: используется в интернете, файлах, базах данных
+
+</v-click>
+
+<v-click>
+
+### Почему это важно для Go
+
+В Go строки — это **байты в кодировке UTF-8** по умолчанию:
+
+```go
+len("Привет")                    // 12 (байт, а не символов!)
+for i, r := range "Привет" {     // правильно перебирает 6 рун (символов)
+    fmt.Printf("%c", r)
+}
 ```
 
 </v-click>
 
-<div mt-20 v-click>
+<v-click>
 
-[Learn more](https://sli.dev/guide/animations#click-animation)
+💡 **Unicode** — огромный каталог всех символов мира с уникальными номерами.  
+💡 **UTF-8** — умный и экономный способ сохранить эти символы в байтах.
+
+</v-click>
+
+---
+
+# Конкатенация строк
+
+В Go строки неизменяемые (immutable)
+
+Каждый раз при "склеивании" создаётся **новая строка** в памяти.  
+От выбора метода зависит **производительность**!
+
+---
+
+# 1. Оператор `+`
+
+Самый простой, но не самый быстрый
+
+```go
+s := "Привет" + ", " + "мир!" + " 🌍"
+fmt.Println(s) // Привет, мир! 🌍
+```
+
+<v-click>
+
+**Когда использовать:**
+- Для 2–5 строк — удобно и читаемо
+- В большинстве случаев в обычном коде
+
+</v-click>
+
+<v-click>
+
+**Проблема:**
+
+При большом количестве конкатенаций создаётся много промежуточных строк → много аллокаций памяти и копирований.
+
+</v-click>
+
+---
+
+# 2. `fmt.Sprintf`
+
+Форматирование с разными типами
+
+```go
+name := "Алексей"
+age := 30
+s := fmt.Sprintf("Меня зовут %s, мне %d лет", name, age)
+fmt.Println(s) // Меня зовут Алексей, мне 30 лет
+```
+
+<v-click>
+
+**Плюсы:**
+- Очень читаемо
+- Безопасно для разных типов
+
+</v-click>
+
+<v-click>
+
+**Минусы:**
+- Медленнее `+` при простых случаях
+- Выделяет память под буфер
+
+</v-click>
+
+<v-click>
+
+**Когда использовать:** когда смешиваешь строки с другими типами (int, float и т.д.)
+
+</v-click>
+
+---
+
+# 3. `strings.Join`
+
+Склеивание слайса строк
+
+```go
+parts := []string{"Go", "—", "это", "круто!"}
+s := strings.Join(parts, " ")
+fmt.Println(s) // Go — это круто!
+```
+
+<v-click>
+
+**Плюсы:**
+- Эффективнее, чем многократный `+` в цикле
+- Один проход по слайсу
+
+</v-click>
+
+<v-click>
+
+**Когда использовать:** когда у тебя уже есть слайс строк
+
+</v-click>
+
+---
+
+# 4. `strings.Builder`
+
+САМЫЙ ЭФФЕКТИВНЫЙ для большого количества операций
+
+Это **рекомендуемый способ** в Go для конкатенации в цикле.
+
+```go {all|1-2|4-8|10}
+import "strings"
+var builder strings.Builder
+
+for i := 1; i <= 5; i++ {
+    builder.WriteString("Строка ")
+    builder.WriteString(strconv.Itoa(i))
+    builder.WriteString("\n")
+}
+
+s := builder.String()
+```
+
+<v-click>
+
+**Почему Builder самый быстрый?**
+
+- Выделяет буфер один раз и растит его по мере необходимости
+- **Ноль лишних аллокаций** (в отличие от `+`)
+- Минимальное копирование
+
+</v-click>
+
+---
+
+# 5. `bytes.Buffer`
+
+Альтернатива Builder
+
+```go
+import "bytes"
+
+var buf bytes.Buffer
+buf.WriteString("Привет")
+buf.WriteString(" от Go!")
+s := buf.String()
+```
+
+`strings.Builder` — это упрощённая версия `bytes.Buffer`, оптимизированная именно для строк.
+
+---
+
+# Сравнение производительности
+
+Пример для 1000 конкатенаций
+
+| Метод              | Время | Аллокаций | Рекомендация |
+|--------------------|-------|-----------|--------------|
+| `+` в цикле        | Очень медленно | ~1000 | ❌ Не использовать в циклах! |
+| `fmt.Sprintf`      | Медленно | Много | ⚠️ Только для простых случаев |
+| `strings.Join`     | Хорошо | Несколько | ✅ Когда есть готовый слайс |
+| `strings.Builder`  | ⚡ Очень быстро | 1–2 | ✅✅ **Лучший выбор для циклов** |
+
+---
+
+# Итог: что использовать и когда?
+
+Выбор метода конкатенации
+
+<div class="grid grid-cols-2 gap-8">
+
+<div>
+
+### Простые случаи
+
+**2–3 строки** → просто `+`
+```go
+s := "Hello" + " " + "World"
+```
+
+**Смешивание типов** → `fmt.Sprintf`
+```go
+fmt.Sprintf("Age: %d", age)
+```
+
+**Слайс строк** → `strings.Join`
+```go
+strings.Join(words, ", ")
+```
+
+</div>
+
+<div>
+
+### Циклы и много операций
+
+**Всегда `strings.Builder`**
+
+```go
+var builder strings.Builder
+for _, word := range words {
+    builder.WriteString(word)
+    builder.WriteString(" ")
+}
+result := builder.String()
+```
+
+</div>
 
 </div>
 
 ---
 
-# Motions
+# byte и rune
 
-Motion animations are powered by [@vueuse/motion](https://motion.vueuse.org/), triggered by `v-motion` directive.
+Понимание разницы критически важно!
 
-```html
-<div
-  v-motion
-  :initial="{ x: -80 }"
-  :enter="{ x: 0 }"
-  :click-3="{ x: 80 }"
-  :leave="{ x: 1000 }"
->
-  Slidev
-</div>
-```
+В Go строки — это **не просто массив символов**, как в многих других языках.
 
-<div class="w-60 relative">
-  <div class="relative w-40 h-40">
-    <img
-      v-motion
-      :initial="{ x: 800, y: -100, scale: 1.5, rotate: -50 }"
-      :enter="final"
-      class="absolute inset-0"
-      src="https://sli.dev/logo-square.png"
-      alt=""
-    />
-    <img
-      v-motion
-      :initial="{ y: 500, x: -100, scale: 2 }"
-      :enter="final"
-      class="absolute inset-0"
-      src="https://sli.dev/logo-circle.png"
-      alt=""
-    />
-    <img
-      v-motion
-      :initial="{ x: 600, y: 400, scale: 2, rotate: 100 }"
-      :enter="final"
-      class="absolute inset-0"
-      src="https://sli.dev/logo-triangle.png"
-      alt=""
-    />
-  </div>
-
-  <div
-    class="text-5xl absolute top-14 left-40 text-[#2B90B6] -z-1"
-    v-motion
-    :initial="{ x: -80, opacity: 0}"
-    :enter="{ x: 0, opacity: 1, transition: { delay: 2000, duration: 1000 } }">
-    Slidev
-  </div>
-</div>
-
-<!-- vue script setup scripts can be directly used in markdown, and will only affects current page -->
-<script setup lang="ts">
-const final = {
-  x: 0,
-  y: 0,
-  rotate: 0,
-  scale: 1,
-  transition: {
-    type: 'spring',
-    damping: 10,
-    stiffness: 20,
-    mass: 2
-  }
-}
-</script>
-
-<div
-  v-motion
-  :initial="{ x:35, y: 30, opacity: 0}"
-  :enter="{ y: 0, opacity: 1, transition: { delay: 3500 } }">
-
-[Learn more](https://sli.dev/guide/animations.html#motion)
-
-</div>
+Для правильной работы с текстом (особенно с русским, китайским, эмодзи) нужно понимать разницу между `byte` и `rune`.
 
 ---
 
-# LaTeX
+# 1. `byte` — это 8-битный байт
 
-LaTeX is supported out-of-box. Powered by [KaTeX](https://katex.org/).
+uint8 от 0 до 255
 
-<div h-3 />
+- `byte` — это псевдоним для `uint8`
+- Строка в Go внутри — это **слайс байт** (`[]byte`)
 
-Inline $\sqrt{3x-1}+(1+x)^2$
+```go
+s := "Hello"
+fmt.Println(s[0])  // 72 — это код буквы 'H' в ASCII
+```
 
-Block
-$$ {1|3|all}
-\begin{aligned}
-\nabla \cdot \vec{E} &= \frac{\rho}{\varepsilon_0} \\
-\nabla \cdot \vec{B} &= 0 \\
-\nabla \times \vec{E} &= -\frac{\partial\vec{B}}{\partial t} \\
-\nabla \times \vec{B} &= \mu_0\vec{J} + \mu_0\varepsilon_0\frac{\partial\vec{E}}{\partial t}
-\end{aligned}
-$$
-
-[Learn more](https://sli.dev/features/latex)
+`s[0]` возвращает **byte**, то есть один байт строки.
 
 ---
 
-# Diagrams
+# Проблема с byte
 
-You can create diagrams / graphs from textual descriptions, directly in your Markdown.
+Многие символы не помещаются в один байт!
 
-<div class="grid grid-cols-4 gap-5 pt-4 -mb-6">
+Русские буквы, эмодзи, китайские иероглифы кодируются в UTF-8 несколькими байтами (от 2 до 4).
 
-```mermaid {scale: 0.5, alt: 'A simple sequence diagram'}
-sequenceDiagram
-    Alice->John: Hello John, how are you?
-    Note over Alice,John: A typical interaction
+```go
+s := "Привет 👋"
+fmt.Println(len(s))        // 13 — длина в байтах!
+fmt.Println(s[0])          // 208 — первый байт буквы 'П'
+fmt.Println(s[1])          // 159 — второй байт буквы 'П'
 ```
 
-```mermaid {theme: 'neutral', scale: 0.8}
-graph TD
-B[Text] --> C{Decision}
-C -->|One| D[Result 1]
-C -->|Two| E[Result 2]
+<v-click>
+
+⚠️ Буква «П» занимает **2 байта**, а эмодзи 👋 — **4 байта**.
+
+Если перебирать строку по байтам — получишь "мусор"!
+
+</v-click>
+
+---
+
+# 2. `rune` — это один символ Unicode
+
+int32 для представления символа
+
+- `rune` — это псевдоним для `int32`
+- Один `rune` представляет **один юникод-символ** (code point)
+
+```go
+s := "Привет 👋"
+runes := []rune(s)
+fmt.Println(len(runes))    // 8 — реальное количество символов!
+fmt.Println(runes[0])      // 1055 — код буквы 'П'
+fmt.Println(runes[6])      // 128075 — код эмодзи 👋
 ```
 
-```mermaid
-mindmap
-  root((mindmap))
-    Origins
-      Long history
-      ::icon(fa fa-book)
-      Popularisation
-        British popular psychology author Tony Buzan
-    Research
-      On effectiveness<br/>and features
-      On Automatic creation
-        Uses
-            Creative techniques
-            Strategic planning
-            Argument mapping
-    Tools
-      Pen and paper
-      Mermaid
-```
+<v-click>
 
-```plantuml {scale: 0.7}
-@startuml
+✅ Чтобы правильно работать с символами — преобразуй строку в слайс рун!
 
-package "Some Group" {
-  HTTP - [First Component]
-  [Another Component]
-}
+</v-click>
 
-node "Other Groups" {
-  FTP - [Second Component]
-  [First Component] --> FTP
-}
+---
 
-cloud {
-  [Example 1]
-}
+# Сравнение byte и rune
 
-database "MySql" {
-  folder "This is my folder" {
-    [Folder 3]
-  }
-  frame "Foo" {
-    [Frame 4]
-  }
-}
+Когда что использовать
 
-[Another Component] --> [Example 1]
-[Example 1] --> [Folder 3]
-[Folder 3] --> [Frame 4]
+| Характеристика | `byte` | `rune` |
+|----------------|--------|--------|
+| Тип | `uint8` | `int32` |
+| Размер | 1 байт | 4 байта |
+| Что представляет | Один байт строки (UTF-8) | Один символ Unicode |
+| Длина строки `len(s)` | Количество **байт** | — |
+| Правильная длина символов | ❌ Нет | ✅ `len([]rune(s))` |
+| Подходит для | Бинарные данные, ASCII | Текст с любыми символами |
 
-@enduml
+---
+
+# Когда использовать что?
+
+byte vs rune
+
+<div class="grid grid-cols-2 gap-8">
+
+<div>
+
+### `byte` и `[]byte`
+
+Используй когда:
+
+- Работа с бинарными данными (файлы, сеть, хэши)
+- Точно знаешь, что текст только ASCII
+- Нужна максимальная эффективность (меньше памяти)
+
+```go
+data := []byte{0x48, 0x69}
+hash := md5.Sum(data)
 ```
 
 </div>
 
-Learn more: [Mermaid Diagrams](https://sli.dev/features/mermaid) and [PlantUML Diagrams](https://sli.dev/features/plantuml)
+<div>
 
----
-foo: bar
-dragPos:
-  square: 691,32,167,_,-16
----
+### `rune` и `[]rune`
 
-# Draggable Elements
+Используй когда:
 
-Double-click on the draggable elements to edit their positions.
+- Нужно считать символы правильно
+- Перебор строки посимвольно
+- Работа с текстом пользователя
 
-<br>
-
-###### Directive Usage
-
-```md
-<img v-drag="'square'" src="https://sli.dev/logo.png">
+```go
+text := "Привет! 😊"
+runes := []rune(text)
+// правильное количество
 ```
 
-<br>
+</div>
 
-###### Component Usage
-
-```md
-<v-drag text-3xl>
-  <div class="i-carbon:arrow-up" />
-  Use the `v-drag` component to have a draggable container!
-</v-drag>
-```
-
-<v-drag pos="663,206,261,_,-15">
-  <div text-center text-3xl border border-main rounded>
-    Double-click me!
-  </div>
-</v-drag>
-
-<img v-drag="'square'" src="https://sli.dev/logo.png">
-
-###### Draggable Arrow
-
-```md
-<v-drag-arrow two-way />
-```
-
-<v-drag-arrow pos="67,452,253,46" two-way op70 />
-
----
-src: ./pages/imported-slides.md
-hide: false
----
+</div>
 
 ---
 
-# Monaco Editor
+# Полезные примеры
 
-Slidev provides built-in Monaco Editor support.
+Правильная работа со строками
 
-Add `{monaco}` to the code block to turn it into an editor:
+### 1. Правильный перебор строки
 
-```ts {monaco}
-import { ref } from 'vue'
-import { emptyArray } from './external'
-
-const arr = ref(emptyArray(10))
+```go
+s := "Привет, world! 👋"
+for i, r := range s {  // range работает по рунам!
+    fmt.Printf("Позиция %d: %c (код %d)\n", i, r, r)
+}
 ```
 
-Use `{monaco-run}` to create an editor that can execute the code directly in the slide:
+`range` по строке автоматически даёт руны — это самый удобный способ!
 
-```ts {monaco-run}
-import { version } from 'vue'
-import { emptyArray, sayHello } from './external'
+---
 
-sayHello()
-console.log(`vue ${version}`)
-console.log(emptyArray<number>(10).reduce(fib => [...fib, fib.at(-1)! + fib.at(-2)!], [1, 1]))
+# Полезные примеры: продолжение
+
+### 2. Получение символа по индексу
+
+```go
+s := "Hello 👋"
+runes := []rune(s)
+fmt.Println(string(runes[6])) // 👋 — правильно!
+
+// fmt.Println(string(s[6]))  // ❌ ошибка! s[6] — это байт, не символ
+```
+
+### 3. Проверка длины в символах
+
+```go
+import "unicode/utf8"
+
+s := "Hello 👋"
+fmt.Println(len(s))                        // 10 байт
+fmt.Println(utf8.RuneCountInString(s))     // 7 символов — правильно!
+```
+
+---
+
+# Числовые типы
+
+Широкий выбор для разных задач
+
+| Тип | Размер | Диапазон | Когда использовать |
+|-----|--------|----------|-------------------|
+| `int` | 32/64 бита | Зависит от платформы | Обычные целые числа |
+| `int8` | 8 бит | -128..127 | Маленький диапазон |
+| `int32` | 32 бита | -2.1 млрд..2.1 млрд | |
+| `int64` | 64 бита | Очень большой | Время, большие числа |
+| `uint*` | Без знака | Только положительные | Счётчики, биты |
+| `float32` | 32 бита | ~7 знаков | Экономия памяти |
+| `float64` | 64 бита | ~15 знаков | **Большинство расчётов** |
+
+```go
+temperature := 23.5     // float64 по умолчанию
+balance := 1000000      // int
+byteValue := byte('A')  // uint8, равно 65
+```
+
+---
+
+# Нулевые значения
+
+Go защищает от случайных ошибок
+
+<v-click>
+
+Если переменную объявили, но не присвоили значение — Go даёт **нулевое**:
+
+</v-click>
+
+<div class="grid grid-cols-2 gap-8 mt-8">
+
+<v-click>
+
+```go
+var num int
+fmt.Println(num)  // 0
+
+var price float64
+fmt.Println(price)  // 0.0
+
+var active bool
+fmt.Println(active)  // false
+```
+
+</v-click>
+
+<v-click>
+
+```go
+var name string
+fmt.Println(name)  // ""
+
+var ptr *int
+fmt.Println(ptr)  // nil
+
+var slice []int
+fmt.Println(slice)  // []
+```
+
+</v-click>
+
+</div>
+
+<v-click>
+
+<div class="mt-8 p-4 bg-blue-500 bg-opacity-10 rounded">
+
+✨ **Главное преимущество**: нет "мусорных" значений, нет undefined!
+
+</div>
+
+</v-click>
+
+---
+
+# Преобразование типов
+
+В Go типизация строгая и статическая
+
+Компилятор знает тип каждой переменной на этапе компиляции.
+
+**Автоматического (неявного) преобразования типов НЕТ!**
+
+Если хочешь использовать значение одного типа как другого — нужно **явно преобразовать**.
+
+Это делает код предсказуемым и защищает от скрытых ошибок.
+
+---
+
+# Основные числовые преобразования
+
+Между int, float64, int32 и т.д.
+
+```go {all|2-3|6-7|10-11|14-15}
+// int → float64
+age := 25                // int
+height := 1.75           // float64
+total := float64(age) + height
+fmt.Println(total)       // 26.75
+
+// float64 → int (отбрасывает дробную часть!)
+truncated := int(height)
+fmt.Println(truncated)   // 1 (не округляет! просто отрезает)
+
+// int32 → int64
+var small int32 = 100
+big := int64(small)      // безопасно
+
+// int64 → int32 (может быть потеря данных!)
+var large int64 = 1000000000
+small = int32(large)     // опасно при больших значениях
+```
+
+
+--- 
+
+# ⚠️ Важно:
+
+- При преобразовании из большего в меньший тип → возможна **потеря данных**
+- Из float в int — **всегда отбрасывается** дробная часть (не округляется)
+
+
+---
+
+# Число → строка
+
+Используем пакет `strconv`
+
+```go {all|1|3-5|8-14}
+import "strconv"
+
+// int → string
+age := 25
+ageStr := strconv.Itoa(age)  // Itoa = "Integer to ASCII"
+fmt.Println(ageStr)          // "25"
+
+// float → string
+price := 99.90
+priceStr := strconv.FormatFloat(price, 'f', 2, 64)
+// 'f' — формат без экспоненты
+// 2   — количество знаков после запятой
+// 64  — битность float64
+fmt.Println(priceStr)        // "99.90"
+```
+
+<v-click>
+
+```go
+// Другие форматы
+scientific := strconv.FormatFloat(1234.56, 'e', 2, 64) // "1.23e+03"
+withPlus := strconv.FormatFloat(-12.34, 'f', 2, 64)    // "-12.34"
+```
+
+</v-click>
+
+---
+
+# Строка → число
+
+С обработкой ошибок!
+
+Строка может быть некорректной, поэтому **всегда проверяй ошибку**.
+
+```go {all|3-9|11-12|13}
+import "strconv"
+
+// Строка → int
+num, err := strconv.Atoi("42")
+if err != nil {
+    fmt.Println("Ошибка преобразования:", err)
+} else {
+    fmt.Println("Число:", num)  // 42
+}
+
+// Ошибки
+_, err = strconv.Atoi("abc")
+fmt.Println(err)  // strconv.Atoi: parsing "abc": invalid syntax
+```
+
+---
+
+# Строка → число: продолжение
+
+Float и bool
+
+```go {all|1-7|9-11|12-15}
+// Строка → float64
+f, err := strconv.ParseFloat("3.14159", 64)
+if err != nil {
+    fmt.Println("Ошибка:", err)
+} else {
+    fmt.Println("Float:", f)  // 3.14159
+}
+
+// ParseFloat умеет и с экспонентой
+f, _ = strconv.ParseFloat("1.23e-4", 64)  // 0.000123
+
+// Строка → bool
+b, err := strconv.ParseBool("true")
+fmt.Println(b)  // true
+// Поддерживает: "1", "t", "True", "TRUE", "true" и аналогично для false
+```
+
+---
+
+# Преобразование []byte ↔ string
+
+Особый случай — очень эффективный
+
+Без копирования в большинстве случаев!
+
+```go
+s := "Привет"
+bytes := []byte(s)      // string → []byte
+back := string(bytes)   // []byte → string
+
+fmt.Println(bytes)      // [208 159 209 128 208 184 208 178 208 181 209 130]
+fmt.Println(back)       // Привет
+```
+
+<v-click>
+
+✅ Полезно при работе с:
+- Сетью (сокеты, HTTP)
+- Файлами (чтение/запись)
+- Хэшами и криптографией
+
+</v-click>
+
+---
+
+# Когда преобразование невозможно
+
+Go не позволит преобразовать несовместимые типы
+
+```go
+var i int = 42
+var s string = string(i)  // ❌ ошибка компиляции!
+```
+
+<v-click>
+
+⚠️ Это не символ, а число — прямое преобразование запрещено!
+
+Нужно через `strconv`:
+
+```go
+var i int = 42
+var s string = strconv.Itoa(i)  // ✅ правильно!
+```
+
+</v-click>
+
+---
+
+# Правила преобразования: итоговая таблица
+
+| Что → Во что | Как делать | Примечание |
+|--------------|------------|------------|
+| Число → другой численный | `newType(oldValue)` | Может обрезать или переполниться |
+| Число → строка | `strconv.Itoa()`, `strconv.FormatFloat()` | |
+| Строка → число | `strconv.Atoi()`, `strconv.ParseFloat()` | **Всегда проверяй ошибку!** |
+| Строка → []byte и обратно | `[]byte(s)`, `string(bytes)` | Очень быстро, часто без копии |
+| Структура → другой тип | Невозможно напрямую | Нужно писать вручную или использовать encoding/json |
+
+
+---
+layout: center
+---
+
+
+# **Главное правило Go**  
+> **«Явное лучше неявного»** — Преобразование типов должно быть очевидным и под контролем программиста.
+
+
+---
+
+# Операторы
+
+Арифметические
+
+```go {all|1|3-8|9-11}
+a, b := 10, 3
+
+fmt.Println(a + b)   // 13  - сложение
+fmt.Println(a - b)   // 7   - вычитание
+fmt.Println(a * b)   // 30  - умножение
+fmt.Println(a / b)   // 3   - целочисленное деление
+fmt.Println(a % b)   // 1   - остаток от деления
+
+a++  // a становится 11 - инкремент
+b--  // b становится 2  - декремент
+```
+
+---
+
+# Операторы сравнения
+
+Возвращают bool
+
+```go {all|1|3-8}
+x, y := 5, 10
+
+x == y   // false  - равно
+x != y   // true   - не равно
+x < y    // true   - меньше
+x <= y   // true   - меньше или равно
+x > y    // false  - больше
+x >= y   // false  - больше или равно
+```
+
+---
+
+# Логические операторы
+
+И, ИЛИ, НЕ
+
+```go {all|1-2|3-5|6-8|9-12}
+hasTicket := true
+hasPassport := false
+
+canTravel := hasTicket && hasPassport   // false (И)
+// canTravel = true только если ОБА условия true
+
+canEnter := hasTicket || hasPassport    // true  (ИЛИ)
+// canEnter = true если ХОТЯ БЫ ОДНО условие true
+
+notAllowed := !hasTicket                // false (НЕ)
+// инвертирует значение
+```
+
+---
+
+# Операторы присваивания
+
+Сокращённая запись
+
+```go {all|1-2|3-4|5-6|7-8|9-10}
+score := 100
+
+score += 20    // 120  - то же что score = score + 20
+score -= 10    // 110  - то же что score = score - 10
+score *= 2     // 220  - то же что score = score * 2
+score /= 5     // 44   - то же что score = score / 5
+score %= 7     // 2    - то же что score = score % 7
+```
+
+---
+
+# Указатели
+
+Работа с адресами в памяти
+
+В Go есть два способа передавать данные: **по значению** (value) и **по ссылке** (через указатель).
+
+Указатели — это одна из самых важных тем, потому что они позволяют:
+- Экономить память
+- Изменять данные "на месте"  
+- Работать с большими структурами эффективно
+
+---
+
+# Что такое указатель?
+
+Адрес переменной в памяти
+
+**Указатель** — это переменная, которая хранит **адрес в памяти** другой переменной.
+
+```go {all|1-2|1|2|3}
+var a int = 10
+var p *int = &a  // p — указатель на a
+fmt.Println(*p)  // 10 — значение по адресу
+```
+
+<v-click>
+
+- `&a` — оператор "взять адрес" → возвращает указатель на `a`
+- `*int` — тип "указатель на int"
+- `*p` — оператор "разыменование" → получить значение, на которое указывает `p`
+
+</v-click>
+
+---
+
+# Зачем нужны указатели?
+
+1.Изменение значения внутри функции
+
+По умолчанию Go передаёт аргументы **по значению** — функция получает копию.
+
+```go {all|1-3|5-8|10}
+func zero(x int) {
+    x = 0  // меняем только копию
+}
+
+func main() {
+    a := 5
+    zero(a)
+    fmt.Println(a) // всё ещё 5 ❌
+}
+```
+
+--- 
+
+
+С указателем — можно изменить оригинал:
+
+```go {all|1-3|5-8}
+func zeroPtr(x *int) {
+    *x = 0  // меняем значение по адресу
+}
+
+func main() {
+    a := 5
+    zeroPtr(&a)
+    fmt.Println(a) // 0 ✅
+}
+```
+
+
+---
+
+# Зачем нужны указатели?
+
+2. Экономия памяти при больших структурах
+
+Если структура большая (много полей), передача по значению создаёт полную копию — медленно и ест память.
+
+```go {all|1-5|7|8}
+type BigStruct struct {
+    Data [1000]int
+    Name string
+    // ...
+}
+
+func process(s BigStruct) { ... }     // ❌ копируется вся структура!
+func processPtr(s *BigStruct) { ... } // ✅ передаётся только адрес (8 байт)
+```
+
+<v-click>
+
+⚡ Передача указателя — **быстро и эффективно**!
+
+</v-click>
+
+---
+
+# Зачем нужны указатели?
+
+3. Методы с изменением структуры
+
+Часто методы-ресиверы делают указателями, чтобы менять сам объект:
+
+```go {all|1-3|5-7|9-13}
+type Counter struct {
+    value int
+}
+
+func (c *Counter) Increment() {  // указатель!
+    c.value++
+}
+
+func main() {
+    c := Counter{value: 5}
+    c.Increment()
+    fmt.Println(c.value) // 6 ✅
+}
+```
+
+<v-click>
+
+⚠️ Если бы ресивер был по значению `(c Counter)` — изменение не сохранилось бы!
+
+</v-click>
+
+---
+
+# Зачем нужны указатели?
+
+4. nil как "пустое" значение
+
+Обычные переменные всегда имеют нулевое значение (0, "", false).
+
+Указатели могут быть `nil` — это удобно для "опциональных" значений.
+
+```go {all|1-4}
+var p *int  // nil
+if p == nil {
+    fmt.Println("указатель пустой")
+}
+```
+
+<v-click>
+
+💡 `nil` — специальное значение для указателей, означающее "ничего не указывает"
+
+</v-click>
+
+---
+
+# Когда использовать указатели?
+
+Практические рекомендации
+
+| Ситуация | Рекомендация | Почему |
+|----------|-------------|--------|
+| Маленькие типы (int, bool, float64) | По значению | Копия дешёвая |
+| Большие структуры (> ~100 байт) | Указатель | Экономия памяти и времени |
+| Нужно изменить аргумент в функции | Указатель | Иначе изменится только копия |
+| Метод должен изменить объект | Указатель-ресивер (`*T`) | Стандартная практика |
+| Возврат структуры из функции | По значению | Компилятор оптимизирует |
+| Возврат интерфейса | Указатель | Интерфейсы содержат указатель внутри |
+
+---
+
+# Кастомные типы
+
+Типобезопасность и выразительность кода
+
+В Go ты можешь создавать **свои собственные типы** на основе существующих.
+
+Это мощный инструмент для:
+- Делать код **читаемым и выразительным**
+- Добавлять **типобезопасность** (компилятор проверяет правильность)
+- Упрощать поддержку и рефакторинг
+
+Есть два способа: **кастомный тип** и **type alias**.
+
+---
+
+# Кастомный тип (type definition)
+
+Новый тип на основе существующего
+
+Это **новый тип**, который основан на существующем, но считается **отдельным**.
+
+```go {all|1-3|5-7|10-12|13-16|17-19}
+type Age int          // новый тип Age на основе int
+type UserID int64     // новый тип UserID на основе int64
+type Email string     // новый тип Email на основе string
+
+func celebrateBirthday(a Age) Age {
+    return a + 1
+}
+
+func main() {
+    var myAge Age = 25
+    var plainInt int = 30
+
+    myAge = celebrateBirthday(myAge)  // ✅ OK
+    // myAge = plainInt                // ❌ ОШИБКА! типы разные
+    // plainInt = myAge                // ❌ ОШИБКА!
+
+    // Нужно явно преобразовать:
+    myAge = Age(plainInt)
+    plainInt = int(myAge)
+}
+```
+
+---
+
+# Зачем кастомные типы?
+
+Преимущества
+
+<v-click>
+
+### 1. Типобезопасность
+
+Нельзя случайно передать обычный `int` туда, где нужен `Age` или `UserID`.
+
+```go
+func createUser(id UserID, email Email) { ... }
+
+// createUser(123, "test@mail.com")  // ❌ ошибка компиляции!
+createUser(UserID(123), Email("test@mail.com"))  // ✅ OK
+```
+
+</v-click>
+
+<v-click>
+
+### 2. Самодокументирующийся код
+
+```go
+func createUser(id UserID, email Email) { ... }
+```
+
+Читаешь — сразу понятно, что это за данные!
+
+</v-click>
+
+---
+
+# Зачем кастомные типы?
+
+3. Можно добавлять методы
+
+```go {all|1|3-5|7-8}
+type Celsius float64
+
+func (c Celsius) ToFahrenheit() float64 {
+    return float64(c)*9/5 + 32
+}
+
+temp := Celsius(25)
+fmt.Println(temp.ToFahrenheit())  // 77
+```
+
+<v-click>
+
+✨ Методы делают работу с типом удобнее и выразительнее!
+
+</v-click>
+
+---
+
+# Псевдоним типа (Type alias)
+
+Полный синоним существующего типа
+
+Это **полный синоним** существующего типа. Компилятор считает их **одним и тем же**.
+
+```go {all|1-2|4-8}
+type Second = int      // = значит alias
+type Meter = float64
+
+func main() {
+    var s Second = 10
+    var i int = 20
+
+    s = i     // ✅ OK — Second и int это одно и то же
+    i = s     // ✅ OK
+}
+```
+
+---
+
+# Зачем нужен alias?
+
+Когда использовать
+
+<v-click>
+
+### 1. Рефакторинг и миграция
+
+Хочешь поменять базовый тип в большом проекте — сначала делаешь alias, потом постепенно меняешь.
+
+</v-click>
+
+<v-click>
+
+### 2. Упрощение длинных типов
+
+```go
+type HandlerFunc = func(http.ResponseWriter, *http.Request)
+type ConfigMap = map[string]interface{}
+```
+
+</v-click>
+
+<v-click>
+
+### 3. Совместимость пакетов
+
+Когда импортируешь тип из другого пакета и хочешь дать ему короткое имя.
+
+</v-click>
+
+---
+
+# Сравнение: кастомный тип vs alias
+
+Ключевые различия
+
+| Характеристика | Кастомный тип (`type T Underlying`) | Alias (`type T = Underlying`) |
+|----------------|-------------------------------------|------------------------------|
+| Это новый тип? | ✅ Да | ❌ Нет (полный синоним) |
+| Совместимость с базовым | ❌ Нет (нужно преобразование) | ✅ Да (полная) |
+| Можно добавлять методы? | ✅ Да | ✅ Да |
+| Когда использовать | Типобезопасность, домен | Рефакторинг, упрощение |
+
+---
+
+# Реальные примеры
+
+Domain-driven design
+
+### 1. Домен-driven дизайн
+
+```go
+type UserID int64
+type OrderID string
+type Money float64  // с методами Round(), Add() и т.д.
+```
+
+### 2. Известные пакеты
+
+- `time.Duration` — это alias для `int64`
+- `sql.NullString` — кастомный тип на основе string с полем Valid
+
+### 3. Ошибка новичков
+
+```go
+type Count int
+func increment(c Count) { c++ }  // ❌ не сработает! передаётся копия
+```
+
+Нужно указатель или метод с ресивером-указателем.
+
+---
+
+# Заключение по кастомным типам
+
+Когда что использовать
+
+<div class="grid grid-cols-2 gap-8">
+
+<div>
+
+### Кастомные типы
+`type Age int`
+
+✅ Используй для:
+- Доменных сущностей (ID, Email, Money)
+- Когда нужна типобезопасность
+- Когда хочешь добавить методы
+
+```go
+type Temperature float64
+type UserID int64
+type Email string
+```
+
+</div>
+
+<div>
+
+### Alias
+`type Meter = float64`
+
+✅ Используй для:
+- Временных упрощений
+- Плавного рефакторинга
+- Сокращения длинных имён
+
+```go
+type Handler = 
+  func(w http.ResponseWriter, 
+       r *http.Request)
+```
+
+</div>
+
+</div>
+
+---
+layout: center
+class: text-left
+---
+
+# Практический пример
+
+Соберём всё вместе
+
+```go {all|1|1-3|1-8|1-13|1-17|1-22}
+package main
+
+import ("fmt"; "strconv")
+
+func main() {
+    name := "Виктория"
+    age := 22
+    height := 168.3
+
+    fmt.Printf("Имя: %s\n", name)
+    fmt.Printf("Возраст: %d лет\n", age)
+    fmt.Printf("Рост: %.1f см\n", height)
+
+    nextYear := age + 1
+    ageString := strconv.Itoa(nextYear)
+    fmt.Println("В следующем году будет:", nextYear)
+
+    isAdult := age >= 18
+    fmt.Printf("Совершеннолетний: %t\n", isAdult)
+}
 ```
 
 ---
@@ -634,8 +1415,54 @@ layout: center
 class: text-center
 ---
 
-# Learn More
+# Ключевые выводы
 
-[Documentation](https://sli.dev) · [GitHub](https://github.com/slidevjs/slidev) · [Showcases](https://sli.dev/resources/showcases)
+<div class="grid grid-cols-2 gap-8 mt-12">
 
-<PoweredBySlidev mt-10 />
+<div>
+
+### ✅ Делайте
+
+- Используйте `:=` внутри функций
+- `strings.Builder` в циклах
+- Указатели для больших структур
+- Кастомные типы для домена
+- Явное преобразование типов
+
+</div>
+
+<div>
+
+### ❌ Избегайте
+
+- `+` для конкатенации в циклах
+- Смешивания `byte` и `rune`
+- Неявных преобразований (их нет!)
+- Передачи больших структур по значению
+- Игнорирования ошибок `strconv`
+
+</div>
+
+</div>
+
+<div class="mt-12">
+
+> **Явное лучше неявного** — философия Go
+
+</div>
+
+---
+layout: center
+background: https://i.pinimg.com/736x/ec/1c/e0/ec1ce032f585bbd6ce5a06f210c585f7.jpg
+class: text-center
+---
+
+# Спасибо за внимание!
+
+Продолжайте изучать Go на практике
+
+<div class="mt-8">
+  <a href="https://go.dev" target="_blank" class="text-blue-500 hover:underline">
+    go.dev — официальная документация
+  </a>
+</div>

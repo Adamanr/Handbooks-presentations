@@ -570,6 +570,9 @@ dragPos:
 square: 691,32,167,\_,-16
 
 ---
+dragPos:
+  square: -17,0,0,0
+---
 
 # Draggable Elements
 
@@ -616,6 +619,7 @@ src: ./pages/imported-slides.md
 hide: false
 
 ---
+
 
 ---
 
